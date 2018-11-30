@@ -134,7 +134,7 @@ Engineering of the APJ Abdul Kalam Technological University.
 %\noindent\textbox{Left longer sample text\hfill}\textbox{\hfil Center\hfil}\textbox{\hfill Right
 
 \end{titlepage}
-\fi
+
 
 \newpage
 
@@ -369,16 +369,16 @@ e healthcare industry.
 The main objectives of the proposed project are:
 
 \begin{itemize}
-        \item To provide a solution for existing issues in health record management systems of hospitals by applying the latest blockchain technology.
-        \item To provide a system where the patient should be the only person to have full control on his health data.
-        \item To design a system where it is possible for an effective and easier sharing of health records between providers.
-        \item To design a system which can used for research purposes with the aid of anonymous health data.
-        \item To implement a system which will prevent multiple fragmented health records at different providers.
-        \item To provide a solution where health record data should be stored at multiple locations to avoid data loss.
+        \item To provide a solution for existing issues in health record management systems of hospitals by applying the latest blockchain technology and to have effective and easier sharing of health records between various providers exists .
+        \item To design a system in which the patient  have the full control on his health data.
+  
+        \item To implement a system which will prevent multiple fragmented health records and data loss at different providers.
+        \item To design a system which can be used for research purposes with the aid of anonymous health data.
+    
     \end{itemize}
 
 
-\newpage
+
 \section{Proposed Solution} 
 
 In the proposed system, we are applying  the emerging blockchain technology in for creating transparent health record chain. The platform we are designing will be patient centric and anyone can join the network using an unique identification string like Aadhaar. When someone joins the network, a new block is created for the individual and upcoming events related to this patient will follow this block. When the patient goes to a new hospital, he opts the data to be shared to the new hospital. If any new health data is produced at the new hospital, hospital first adds the information into the IPFS file system. The hash of this file is added to the patient's chain.
@@ -393,6 +393,62 @@ In the proposed system, we are applying  the emerging blockchain technology in f
         \label{fig:my_label}
     \end{figure}
     \newpage
+\section{Architecture}        
+\begin{figure}[h!]
+        \centering
+        \includegraphics[scale=0.7]{arch.jpeg}
+        \caption{Architecture}
+        \label{fig:my_label}
+    \end{figure} 
+Our project mainly have 4 modules :
+\begin{enumerate}
+    \item API Module
+    \item Ayush Platform Module
+    \item Hyperledger Fabric Network
+    \item Inter Planetary File System (IPFS) 
+\end{enumerate}
+\subsection{API Module}
+API Module act as an interface between Ayush Platform and End Users (Patients, Hospitals and Doctors).It abstracts implementation details of Ayush Platform and Users can interact using simple UI and http requests. 
+
+
+
+\subsection{Ayush Platform}
+Ayush Platform abstracts implementation details of Hyperledger Fabric, IPFS and provides services to API module. Various modules present in Ayush Network are :
+\begin{enumerate}
+    \item Fabric Client
+    \item IPFS Interface
+    \item Auth Module
+    \item Membership Module
+    \item Application Logic and Database
+\end{enumerate}
+
+\subsubsection{Fabric Client}
+Fabric Cient encapsulates the APIs to interact with Peers and Orderers of the Fabric network to install and instantiate chaincodes, send transaction invocations and perform chaincode queries.
+
+\subsubsection{IPFS Interface}
+Inter Planetary File System (IPFS) Interface is used to communicate with IPFS to upload or fetch from IPFS network.
+\subsubsection{Auth Module}
+Auth Module is used to recognize a user's identity and allowing only legimate users to interact with the platform.
+
+\subsubsection{Membership Module}
+Membership Module is a component that aims to offer an abstraction of a membership operation architecture. In particular, it abstracts away all cryptographic mechanisms and protocols behind issuing and validating certificates, and user authentication. it issues certificates which are used by peers to join the Hyperledger Fabric Network.
+
+\subsubsection{Application Logic and Database}
+This module will be responsible for overall operation of the platform and it has a local database also.
+
+\subsection{Hyperledger Fabric Network}
+Hyperledger Fabric is a platform for distributed ledger solutions underpinned by a modular architecture delivering high degrees of confidentiality, resiliency, flexibility, and scalability. It is designed to support pluggable implementations of different components and accommodate the complexity and intricacies that exist across the economic ecosystem.Hyperledger Fabric also offers the ability to create channels, allowing a group of participants to create a separate ledger of transactions. This is an especially important option for networks where some participants might be competitors and not want every transaction they make — a special price they’re offering to some participants and not others, for example — known to every participant. If two participants form a channel, then those participants — and no others — have copies of the ledger for that channel.
+\par Hyperledger Fabric has a ledger subsystem comprising two components: the world state and the transaction log. Each participant has a copy of the ledger to every Hyperledger Fabric network they belong to.
+
+\subsection{Inter Planetary File System (IPFS) }
+IPFS (the InterPlanetary File System) is a new hypermedia distribution protocol, addressed by content and identities. IPFS enables the creation of completely distributed applications. It aims to make the web faster, safer, and more open.
+\par IPFS is a distributed file system that seeks to connect all computing devices with the same system of files. In some ways, this is similar to the original aims of the Web, but IPFS is actually more similar to a single bittorrent swarm exchanging git objects. You can read more about its origins in the paper IPFS - Content Addressed, Versioned, P2P File System.
+
+
+
+
+
+\newpage
 \section{Data Flow Diagrams}
     \begin{figure}[h!]
         \centering
@@ -413,13 +469,7 @@ In the proposed system, we are applying  the emerging blockchain technology in f
         \label{fig:my_label}
     \end{figure}
         
-\section{Architecture}        
-\begin{figure}[h!]
-        \centering
-        \includegraphics[scale=0.7]{arch.jpeg}
-        \caption{Architecture}
-        \label{fig:my_label}
-    \end{figure}
+
 \section{Flow Charts}   
 
     \begin{figure}[h!]
@@ -442,19 +492,40 @@ In the proposed system, we are applying  the emerging blockchain technology in f
         \caption{Record Sharing}
         \label{fig:my_label}
     \end{figure}
+    
    \section{Prototype Design} 
+   \subsection{Ayush Home Page}
             \begin{figure}[h!]
         \centering
         \includegraphics[scale=0.3]{proto1.png}
-        \caption{Prototype Design}
+        \caption{Ayush Home Page}
         \label{fig:my_label}
     \end{figure}
+    This screen has 2 options :
+    \begin{enumerate}
+        \item Sign In
+        \item Create New Account
+    \end{enumerate}
+    \subsubsection{Sign In}
+    It has 3 fields
+    \begin{enumerate}
+        \item Username : Unique Identifier used to identify a user
+        \item Password : Secret owned by the user
+        \item Type of User : Patient/Doctor/Hospital
+    \end{enumerate}
+    
+    \subsubsection{Create New Account}
+    It will help a user to create new account to interact with the Ayush platform.
+    
+   \newpage 
+  \subsection{Patient Dashboard}  
     \begin{figure}
         \centering
         \includegraphics[scale=0.3,width=10cm]{Proto2.png}
-        \caption{Prototype Design}
+        \caption{Patient Dashboard}
         \label{fig:my_label}
     \end{figure}
+    Patient Dashboard displays details of doctors and hospitals.Patient can grant or revoke access from doctor and hospital to his medical record. Filtering option is available. 
     \begin{figure}
         \centering
         \includegraphics[scale=0.3,width=10cm]{Proto3.png}
